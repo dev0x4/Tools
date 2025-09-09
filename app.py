@@ -365,9 +365,9 @@ def reset_counters():
 def download_desktop():
     """Download desktop tool"""
     try:
-        desktop_file = os.path.join(app.static_folder or 'static', 'MiniWorldModGenerator.exe')
+        desktop_file = os.path.join(app.static_folder or 'static', 'desktop_app.exe')
         if os.path.exists(desktop_file):
-            return send_file(desktop_file, as_attachment=True, download_name='MiniWorldModGenerator.exe')
+            return send_file(desktop_file, as_attachment=True, download_name='desktop_app.exe')
         else:
             flash('Desktop tool không tìm thấy', 'error')
             return redirect(url_for('index'))
@@ -376,59 +376,6 @@ def download_desktop():
         flash(f'Lỗi tải desktop tool: {str(e)}', 'error')
         return redirect(url_for('index'))
 
-@app.route('/download_source')
-def download_source():
-    """Download complete source code as ZIP"""
-    try:
-        import zipfile
-        from datetime import datetime
-        
-        # Tạo file ZIP trong thư mục tạm
-        zip_filename = f'miniworld_mod_generator_source_{datetime.now().strftime("%Y%m%d_%H%M%S")}.zip'
-        zip_path = os.path.join(tempfile.gettempdir(), zip_filename)
-        
-        # Các file và thư mục cần đưa vào ZIP
-        source_files = [
-            'app.py',
-            'main.py', 
-            'mod_generator.py',
-            'desktop_app.py',
-            'replit.md',
-            'templates/',
-            'static/'
-        ]
-        
-        # Thư mục gốc của dự án
-        project_root = os.path.dirname(os.path.abspath(__file__))
-        
-        with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-            for item in source_files:
-                item_path = os.path.join(project_root, item)
-                
-                if os.path.isfile(item_path):
-                    # Thêm file đơn lẻ
-                    zipf.write(item_path, item)
-                    
-                elif os.path.isdir(item_path):
-                    # Thêm toàn bộ thư mục
-                    for root, dirs, files in os.walk(item_path):
-                        for file in files:
-                            file_path = os.path.join(root, file)
-                            # Tạo đường dẫn tương đối trong ZIP
-                            arcname = os.path.relpath(file_path, project_root)
-                            zipf.write(file_path, arcname)
-        
-        return send_file(
-            zip_path,
-            as_attachment=True,
-            download_name=zip_filename,
-            mimetype='application/zip'
-        )
-        
-    except Exception as e:
-        app.logger.error(f'Error creating source ZIP: {str(e)}')
-        flash(f'Lỗi tạo file ZIP mã nguồn: {str(e)}', 'error')
-        return redirect(url_for('index'))
 
 @app.errorhandler(404)
 def not_found(error):
@@ -440,7 +387,7 @@ def internal_error(error):
     flash('An internal error occurred. Please try again.', 'error')
     return render_template('index.html', creatures=mod_gen.creature_groups), 500
 
-if __name__ == "__main__":
-    import os
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    # Ensure temp directory exists
+    os.makedirs('temp', exist_ok=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
