@@ -561,7 +561,8 @@ body::before {
     border-radius: var(--radius-2xl);
     box-shadow: var(--shadow-xl);
     backdrop-filter: blur(20px);
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
+    color: var(--text-primary);
 }
 
 .modal-header {
@@ -570,8 +571,49 @@ body::before {
     background: var(--gradient-card);
 }
 
+.modal-header .modal-title {
+    color: var(--text-primary) !important;
+    font-weight: 700;
+}
+
 .modal-body {
     padding: 2rem;
+    color: var(--text-primary);
+}
+
+.modal-body h6 {
+    color: var(--primary) !important;
+    font-weight: 700;
+}
+
+.modal-body p {
+    color: var(--text-primary) !important;
+    line-height: 1.6;
+}
+
+.modal-body .list-unstyled li {
+    color: var(--text-primary) !important;
+}
+
+.modal-body .btn {
+    color: white !important;
+}
+
+/* Accordion trong modal */
+.accordion-button {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-secondary) !important;
+    font-weight: 600;
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--primary) !important;
+    background-color: rgba(99, 102, 241, 0.1) !important;
+}
+
+.accordion-body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary) !important;
 }
 
 /* Loading animations */
@@ -677,28 +719,214 @@ body::before {
     }
 }
 
-/* Dark mode support */
+/* Improved contrast for better readability */
+.text-primary {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+}
+
+.text-secondary {
+    color: var(--text-secondary) !important;
+    font-weight: 500;
+}
+
+/* Force dark text for light backgrounds */
+.modal-content, .modal-body, .modal-header {
+    color: #1e293b !important;
+}
+
+.modal-body p, .modal-body li, .modal-body h6 {
+    color: #1e293b !important;
+}
+
+.modal-header .modal-title {
+    color: #1e293b !important;
+}
+
+/* Mobile specific improvements */
+@media (max-width: 768px) {
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 80%);
+        color: #ffffff;
+    }
+    
+    .hero-title, .hero-subtitle {
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        color: #ffffff !important;
+    }
+    
+    .form-card {
+        background: rgba(255, 255, 255, 0.98);
+        border: 2px solid rgba(102, 126, 234, 0.2);
+    }
+    
+    .card-header {
+        background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+    
+    .card-title {
+        color: #1e293b !important;
+        text-shadow: none;
+    }
+    
+    .card-subtitle {
+        color: #64748b !important;
+    }
+    
+    .form-label {
+        color: #1e293b !important;
+        font-weight: 700;
+    }
+    
+    .form-control, .form-select {
+        background: #ffffff;
+        color: #1e293b !important;
+        border: 2px solid #e2e8f0;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        background: #ffffff;
+        color: #1e293b !important;
+        border-color: #6366f1;
+    }
+    
+    .modern-navbar {
+        background: rgba(255, 255, 255, 0.98);
+    }
+    
+    .navbar-brand {
+        color: #6366f1 !important;
+        text-shadow: none;
+    }
+    
+    .nav-link {
+        color: #64748b !important;
+    }
+    
+    .nav-link:hover {
+        color: #6366f1 !important;
+        background: rgba(99, 102, 241, 0.1);
+    }
+    
+    /* Modal fixes for mobile */
+    .modal-content {
+        background: rgba(255, 255, 255, 0.99) !important;
+        color: #1e293b !important;
+    }
+    
+    .modal-body {
+        color: #1e293b !important;
+    }
+    
+    .modal-body p, .modal-body li, .modal-body ol li {
+        color: #1e293b !important;
+    }
+    
+    .modal-header .modal-title {
+        color: #1e293b !important;
+    }
+}
+
+/* Dark mode support with better contrast */
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-primary: #1f2937;
         --bg-secondary: #111827;
         --bg-accent: #374151;
         --text-primary: #f9fafb;
-        --text-secondary: #9ca3af;
-        --border-light: #374151;
+        --text-secondary: #d1d5db;
+        --border-light: #4b5563;
     }
     
     body {
         background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
     }
     
+    .hero-section {
+        background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #a855f7 100%);
+    }
+    
     .form-card {
         background: rgba(31, 41, 55, 0.95);
+        border: 2px solid #4b5563;
+    }
+    
+    .card-header {
+        background: linear-gradient(145deg, #374151 0%, #4b5563 100%);
+    }
+    
+    .card-title {
+        color: #f9fafb !important;
+    }
+    
+    .card-subtitle {
+        color: #d1d5db !important;
+    }
+    
+    .form-label {
+        color: #f9fafb !important;
     }
     
     .form-control, .form-select {
         background: #374151;
-        color: var(--text-primary);
-        border-color: #4b5563;
+        color: #f9fafb !important;
+        border-color: #6b7280;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        background: #374151;
+        color: #f9fafb !important;
+        border-color: #8b5cf6;
+    }
+    
+    .modern-navbar {
+        background: rgba(31, 41, 55, 0.95);
+    }
+    
+    .navbar-brand {
+        color: #a855f7 !important;
+    }
+    
+    .nav-link {
+        color: #d1d5db !important;
+    }
+    
+    .nav-link:hover {
+        color: #a855f7 !important;
+        background: rgba(168, 85, 247, 0.1);
+    }
+}
+
+/* Force high contrast on mobile dark mode */
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+    .hero-title, .hero-subtitle {
+        color: #ffffff !important;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    }
+    
+    .card-title {
+        color: #ffffff !important;
+        font-weight: 800;
+    }
+    
+    .card-subtitle {
+        color: #e5e7eb !important;
+    }
+    
+    .form-label {
+        color: #ffffff !important;
+        font-weight: 700;
+    }
+    
+    .form-control, .form-select {
+        background: #4b5563;
+        color: #ffffff !important;
+        border: 2px solid #6b7280;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        background: #4b5563;
+        color: #ffffff !important;
+        border-color: #a855f7;
     }
 }

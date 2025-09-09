@@ -91,7 +91,7 @@ class ModGenerator:
         return creatures
     
     def group_creatures_by_level(self):
-        """Group creatures by their base name and return the highest level for each"""
+        """Group creatures by their base name and return the highest level copy_id for each"""
         data = """01|3430|Khủng Long Hóa Thạch Thường|3431|Khủng Long Hóa Thạch|3432|Khủng Long Hóa Thạch Siêu Cấp
 02|3433|Sóc Bay Nhỏ|3434|Sóc Bay Nhanh Nhẹn|3435|Sóc Bay Láu Cá
 03|3436|Kỳ Lân|3437|Thần Kỳ Lân|3438|Kỳ Lân May Mắn
@@ -155,11 +155,10 @@ class ModGenerator:
 61|4672|Vỏ Sò Lấp Lánh|4673|Giấc Mộng Phù Quang|4674|Ánh Sao San Hô
 62|4682|Làn Mây Mộng Ảo|4683|Bóng Mộng Cảnh|4684|Làn Mây Tiên Cảnh"""
         
-        groups = {}
+        highest_level_creatures = {}
         for line in data.strip().split('\n'):
             parts = line.split('|')
             if len(parts) >= 3:
-                group_id = parts[0]
                 creatures_in_group = []
                 
                 # Parse each creature variant in the group
@@ -170,19 +169,15 @@ class ModGenerator:
                         creatures_in_group.append({
                             'copyid': copy_id,
                             'name': name,
-                            'level': (i // 2) + 1
+                            'position': i // 2  # Position in line determines level (0, 1, 2...)
                         })
                 
                 if creatures_in_group:
-                    # Get the highest level (last) creature for this group
-                    highest_level = max(creatures_in_group, key=lambda x: x['level'])
-                    groups[group_id] = {
-                        'base_name': highest_level['name'],
-                        'copyid': highest_level['copyid'],
-                        'all_variants': creatures_in_group
-                    }
+                    # Get the highest level (last non-empty) creature for this group
+                    highest_level = max(creatures_in_group, key=lambda x: x['position'])
+                    highest_level_creatures[highest_level['copyid']] = highest_level['name']
         
-        return groups
+        return highest_level_creatures
 
     def generate_files(self, id_value, copyid_value, author_value, item_name):
         """Generate mod files synchronously"""
