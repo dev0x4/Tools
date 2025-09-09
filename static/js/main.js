@@ -637,6 +637,42 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', debounce(handleResize, 250));
     handleResize(); // Initial call
     
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const body = document.body;
+    
+    // Get saved theme or default to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    
+    function setTheme(theme) {
+        body.className = theme + '-theme';
+        
+        if (theme === 'dark') {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+        
+        localStorage.setItem('theme', theme);
+        
+        // Add transition effect
+        body.style.transition = 'all 0.3s ease';
+        setTimeout(() => {
+            body.style.transition = '';
+        }, 300);
+    }
+    
+    themeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        const currentTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+    });
+
     // Service worker registration (for PWA capabilities)
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(err => {

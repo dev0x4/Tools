@@ -754,8 +754,226 @@ body::before {
     }
 }
 
-/* Dark mode support with better contrast */
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-left: 0.5rem;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-btn i {
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Manual Dark Theme */
+.dark-theme {
+    --bg-primary: #1f2937;
+    --bg-secondary: #111827;
+    --bg-accent: #374151;
+    --bg-light: #374151;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --border-light: #4b5563;
+    --border-medium: #6b7280;
+    --border-dark: #9ca3af;
+}
+
+.dark-theme body {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+.dark-theme body::before {
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.3) 0%, transparent 50%);
+}
+
+.dark-theme .hero-section {
+    background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 50%, #a855f7 100%);
+}
+
+.dark-theme .form-card {
+    background: rgba(31, 41, 55, 0.95);
+    border: 2px solid #4b5563;
+}
+
+.dark-theme .card-header {
+    background: linear-gradient(145deg, #374151 0%, #4b5563 100%);
+}
+
+.dark-theme .card-title {
+    color: #f9fafb !important;
+}
+
+.dark-theme .card-subtitle {
+    color: #d1d5db !important;
+}
+
+.dark-theme .form-label {
+    color: #f9fafb !important;
+}
+
+.dark-theme .form-control, 
+.dark-theme .form-select {
+    background: #374151;
+    color: #f9fafb !important;
+    border-color: #6b7280;
+}
+
+.dark-theme .form-control:focus, 
+.dark-theme .form-select:focus {
+    background: #374151;
+    color: #f9fafb !important;
+    border-color: #8b5cf6;
+}
+
+.dark-theme .modern-navbar {
+    background: rgba(31, 41, 55, 0.95);
+}
+
+.dark-theme .navbar-brand {
+    color: #a855f7 !important;
+}
+
+.dark-theme .nav-link {
+    color: #d1d5db !important;
+}
+
+.dark-theme .nav-link:hover {
+    color: #a855f7 !important;
+    background: rgba(168, 85, 247, 0.1);
+}
+
+.dark-theme .theme-toggle-btn {
+    background: rgba(55, 65, 81, 0.8);
+    border-color: rgba(107, 114, 128, 0.5);
+    color: #d1d5db;
+}
+
+.dark-theme .theme-toggle-btn:hover {
+    background: rgba(107, 114, 128, 0.8);
+    color: #a855f7;
+}
+
+.dark-theme .creature-info {
+    background: linear-gradient(145deg, #374151 0%, #4b5563 100%);
+    border-color: #6b7280;
+}
+
+.dark-theme .status-section {
+    background: linear-gradient(145deg, #374151 0%, #4b5563 100%);
+    border-color: #6b7280;
+}
+
+.dark-theme .status-item:hover {
+    background: rgba(168, 85, 247, 0.1);
+}
+
+/* Force mobile dark theme when dark-theme class is applied */
+.dark-theme .hero-title, 
+.dark-theme .hero-subtitle {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Light Theme (Default) - Override any media queries */
+.light-theme {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-accent: #f1f5f9;
+    --bg-light: #fefefe;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border-light: #e2e8f0;
+    --border-medium: #cbd5e1;
+    --border-dark: #94a3b8;
+}
+
+.light-theme body {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #f1f5f9 50%, #f8fafc 100%);
+}
+
+.light-theme .hero-section {
+    background: var(--gradient-hero);
+}
+
+.light-theme .form-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.light-theme .card-header {
+    background: var(--gradient-card);
+}
+
+.light-theme .card-title {
+    color: var(--text-primary) !important;
+}
+
+.light-theme .card-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+.light-theme .form-label {
+    color: var(--text-primary) !important;
+}
+
+.light-theme .form-control, 
+.light-theme .form-select {
+    background: var(--bg-light);
+    color: var(--text-primary) !important;
+    border-color: var(--border-light);
+}
+
+.light-theme .form-control:focus, 
+.light-theme .form-select:focus {
+    background: var(--bg-primary);
+    color: var(--text-primary) !important;
+    border-color: var(--primary);
+}
+
+.light-theme .modern-navbar {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.light-theme .navbar-brand {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.light-theme .nav-link {
+    color: var(--text-secondary) !important;
+}
+
+.light-theme .nav-link:hover {
+    color: var(--primary) !important;
+    background: var(--bg-accent);
+}
+
+/* Automatic Dark mode support (only when no manual theme class) */
 @media (prefers-color-scheme: dark) {
+    body:not(.light-theme):not(.dark-theme) {
     :root {
         --bg-primary: #1f2937;
         --bg-secondary: #111827;

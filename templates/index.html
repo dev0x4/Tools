@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="light-theme">
     <!-- Modern Navbar -->
     <nav class="navbar navbar-expand-lg modern-navbar">
         <div class="container">
@@ -40,6 +40,11 @@
                             <i class="fas fa-desktop me-1"></i>
                             Tải Desktop Tool
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-sm theme-toggle-btn" id="themeToggle" type="button">
+                            <i class="fas fa-moon" id="themeIcon"></i>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -197,7 +202,7 @@
         <div class="text-center mt-5 text-muted">
             <p class="mb-0" style="font-weight: 500; font-size: 1rem;">
                 <i class="fas fa-heart text-danger me-2" style="animation: heartbeat 1.5s ease-in-out infinite;"></i>
-                 <span style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">Mini World Mod Generator</span>
+                Được tạo với ❤️ bởi <span style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">Mini World Mod Generator</span>
             </p>
             <style>
                 @keyframes heartbeat {
