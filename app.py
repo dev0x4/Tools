@@ -379,21 +379,13 @@ def download_desktop():
 
 @app.errorhandler(404)
 def not_found(error):
-    # Create sorted list of creatures for dropdown
-    creatures_list = []
-    for copy_id, name in sorted(mod_gen.creature_data.items()):
-        creatures_list.append((copy_id, name))
-    return render_template('index.html', creatures=creatures_list), 404
+    return render_template('index.html', creatures=mod_gen.creature_groups), 404
 
 @app.errorhandler(500)
 def internal_error(error):
     app.logger.error(f'Internal error: {str(error)}')
     flash('An internal error occurred. Please try again.', 'error')
-    # Create sorted list of creatures for dropdown
-    creatures_list = []
-    for copy_id, name in sorted(mod_gen.creature_data.items()):
-        creatures_list.append((copy_id, name))
-    return render_template('index.html', creatures=creatures_list), 500
+    return render_template('index.html', creatures=mod_gen.creature_groups), 500
 
 if __name__ == '__main__':
     # Ensure temp directory exists
