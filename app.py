@@ -440,7 +440,7 @@ def internal_error(error):
     flash('An internal error occurred. Please try again.', 'error')
     return render_template('index.html', creatures=mod_gen.creature_groups), 500
 
-if __name__ == '__main__':
-    # Ensure temp directory exists
-    os.makedirs('temp', exist_ok=True)
-    app.run(host='0.0.0.0', port=5000, debug=True)
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
